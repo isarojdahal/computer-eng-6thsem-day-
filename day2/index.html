@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="display: flex; gap: 5px">
+    <button onclick="decreaseCount(event)">-</button>
+    <div id="countValue">0</div>
+    <button id="plusButton" onclick="increaseCount(event)">+</button>
+  </body>
+
+  <script>
+    let count = 0;
+    const el = document.getElementById("countValue");
+    function increaseCount(e) {
+      console.log("increase count");
+      //   count++;
+      count = count + 1;
+      el.innerText = count;
+    }
+
+    function decreaseCount() {
+      count = count - 1;
+      // count--;
+      el.innerText = count;
+    }
+  </script>
+</html>

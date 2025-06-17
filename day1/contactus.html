@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+  </head>
+  <body>
+    <a href="aboutus.html"><small>Back to about us</small></a>
+    <h2>Contact us</h2>
+
+    <form>
+      Name
+      <input type="text" name="name" id="username" />
+
+      <br />
+      Email
+      <input type="email" name="email" />
+      <br />
+      Message
+      <br />
+      <textarea name="message"></textarea>
+
+      <br />
+      <input type="submit" value="Submit" onclick="handleSubmit(event)" />
+    </form>
+    <div id="status"></div>
+  </body>
+  <script>
+    const statusDiv = document.getElementById("status");
+
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      //   const name = document.forms[0]["name"].value;
+
+      const name = document.getElementById("username").value;
+      console.log("name", name);
+      const email = document.forms[0]["email"].value;
+      const message = document.forms[0]["message"].value;
+
+      if (name == "" || email == "" || message == "") {
+        statusDiv.innerText = "All fields are not complete";
+        statusDiv.style.color = "red";
+      } else {
+        statusDiv.innerText = "Form submitted";
+        statusDiv.style.color = "green";
+      }
+    }
+  </script>
+</html>
