@@ -12,14 +12,15 @@
     </div>
   </body>
   <script>
-    let countValue = document.getElementById("count").innerText;
+    let countValue = document.getElementById("count");
+
     function increaseCount() {
-      countValue = parseInt(countValue) + 1;
+      countValue.innerText = parseInt(countValue.innerText) + 1;
     }
 
     function decreaseCount() {
-      if (value > 0) {
-        countValue = parseInt(countValue) - 1;
+      if (countValue.innerText > 0) {
+        countValue.innerText = parseInt(countValue.innerText) - 1;
       }
     }
   </script>

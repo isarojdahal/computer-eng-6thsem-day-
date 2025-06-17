@@ -1,0 +1,37 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="display: flex; flex-direction: column; gap: 5px">
+      Task name
+      <input type="text" name="taskName" />
+      <br />
+      Date
+      <input type="date" name="taskDate" />
+      <br />
+      <input type="button" value="Add" onclick="handleAdd()" />
+    </form>
+
+    <br />
+    <div id="tasks"></div>
+  </body>
+  <script>
+    function handleAdd() {
+      const task = document.forms[0]["taskName"].value;
+      const date = document.forms[0]["taskDate"].value;
+
+      document.getElementById("tasks").innerHTML += `
+      <br/>
+      Task : ${task}<br/>
+      Date : ${date}<br/>
+      <br/>
+      `;
+
+      //clear the form data.
+      document.forms[0].reset();
+    }
+  </script>
+</html>
