@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="display: flex; gap: 5px">
+      <input type="button" value="-" onclick="decreaseCount()" />
+      <div id="count">0</div>
+      <input type="button" value="+" onclick="increaseCount()" />
+    </div>
+  </body>
+  <script>
+    let countValue = document.getElementById("count");
+
+    function setValue() {
+      if (localStorage.getItem("count")) {
+        countValue.innerText = localStorage.getItem("count");
+      } else countValue.innerText = 0;
+    }
+
+    // window.onstorage = function () {
+    //   setValue();
+    // };
+
+    setValue();
+
+    function increaseCount() {
+      countValue.innerText = parseInt(countValue.innerText) + 1;
+      localStorage.setItem("count", countValue.innerText);
+    }
+
+    function decreaseCount() {
+      if (countValue.innerText > 0) {
+        countValue.innerText = parseInt(countValue.innerText) - 1;
+        localStorage.setItem("count", countValue.innerText);
+      }
+    }
+  </script>
+</html>

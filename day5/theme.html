@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="Dark" onclick="changeTheme('dark')" />
+    <input type="button" value="Light" onclick="changeTheme('light')" />
+  </body>
+
+  <script>
+    if (localStorage.getItem("theme")) {
+      changeTheme(localStorage.getItem("theme"));
+    }
+    function changeTheme(value) {
+      console.log("value", value);
+      if (value == "dark") {
+        document.body.bgColor = "black";
+        localStorage.setItem("theme", "dark");
+      }
+      if (value == "light") {
+        document.body.bgColor = "white";
+        localStorage.setItem("theme", "light");
+      }
+    }
+  </script>
+</html>
