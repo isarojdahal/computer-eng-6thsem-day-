@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="task" id="taskTitle" />
+
+    <input type="date" name="taskDate" id="taskDate" />
+
+    <input type="button" value="Add" onclick="addTodo()" />
+
+    <br />
+    <hr />
+    <div id="content"></div>
+  </body>
+
+  <script>
+    // const data = JSON.parse(localStorage.getItem("data"));
+    // document.getElementById("content").innerHTML = `${data.title}
+    // <br/>
+    // ${data.date}`;
+
+    function addTodo() {
+      const taskTitle = document.getElementById("taskTitle").value;
+      const taskDate = document.getElementById("taskDate").value;
+      document.getElementById(
+        "content"
+      ).innerHTML += `<br/>${taskTitle}<br/>${taskDate}`;
+
+      localStorage.setItem(
+        "data",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("data") ?? []),
+          { title: taskTitle, date: taskDate },
+        ])
+      );
+    }
+  </script>
+</html>
