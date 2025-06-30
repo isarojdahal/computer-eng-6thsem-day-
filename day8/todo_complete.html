@@ -22,11 +22,6 @@
       contentDiv.innerHTML = "";
       const data = JSON.parse(localStorage.getItem("data"));
 
-      // for (let i = 0; i < data.length; i++) {
-      //   document.getElementById("content").innerHTML += `
-      //   <br/>${data[i].title}<br/>${data[i].date}`;
-      // }
-
       if (data && data.length > 0) {
         for (let i = 0; i < data.length; i++) {
           contentDiv.innerHTML += `
@@ -44,7 +39,11 @@
     }
 
     function deleteTodo(index) {
-      console.log("hami ahiley deleteTodo vanne function ma xau.");
+      const existingData = JSON.parse(localStorage.getItem("data"));
+      const remainingData = existingData.filter((value, i) => i != index);
+
+      localStorage.setItem("data", JSON.stringify(remainingData));
+      renderTodo();
     }
 
     function addTodo() {

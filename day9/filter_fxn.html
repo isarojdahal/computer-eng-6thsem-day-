@@ -1,0 +1,29 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    const users = ["nokia", "nvidia", "username"];
+
+    // const filteredUsers = users.filter(function (value, index) {
+    //   if (value != "nokia") return true;
+    // });
+
+    const filteredUsers = users.filter((value, index) => value != "nokia");
+
+    console.log("filteredUsers", filteredUsers);
+
+    // Normal way of doing with js (without function)
+    // let filteredUsers = [];
+    // for (const u of users) {
+    //   if (u === "nokia") continue;
+    //   else filteredUsers.push(u);
+    // }
+    // console.log("users", users);
+    // console.log("filteredUsers", filteredUsers);
+  </script>
+</html>

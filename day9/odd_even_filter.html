@@ -1,0 +1,21 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    const nums = [2, 3, 5, 7, 8, 100, 200, 89];
+
+    // const evenNumbers = nums.filter(function (value, index) {
+    //   if (value % 2 == 0) return true;
+    // });
+
+    // short hand
+    const evenNumbers = nums.filter((value, index) => value % 2 == 0);
+
+    console.log("evenNumbers", evenNumbers);
+  </script>
+</html>
