@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        border: 1px solid #ccc;
+        padding: 50px;
+      "
+    >
+      <label>Email</label>
+      <input type="email" name="" id="email" />
+
+      <label>Password</label>
+      <input type="password" name="" id="password" />
+      <br />
+      <input type="button" value="Login" onclick="loginUser()" />
+    </div>
+
+    <div id="status"></div>
+  </body>
+
+  <script>
+    function loginUser() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        alert("Both Email and passwords are required");
+        return;
+      }
+
+      //   fetch(`http://localhost:4000/login?email=${email}&password=${password}`)
+      // .then((res) => res.json())
+      // .then((json) => {
+      //   console.log("json", json);
+
+      //   document.getElementById("status").innerHTML = json.message;
+      // });
+
+      fetch(`http://localhost:4000/auth/login`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log("json", json);
+
+          document.getElementById("status").innerHTML = json.message;
+        });
+    }
+  </script>
+</html>
