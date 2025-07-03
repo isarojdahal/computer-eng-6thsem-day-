@@ -1,0 +1,28 @@
+<!-- req: /user?name=Saroj, res: Namaste Saroj -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="" id="name" />
+    <button onclick="sendGreetings()">Greet</button>
+
+    <br />
+    <div id="status"></div>
+  </body>
+
+  <script>
+    function sendGreetings() {
+      const name = document.getElementById("name").value;
+
+      fetch("http://localhost:4000/user/greet?name=" + name)
+        .then((res) => res.json())
+        .then((json) => {
+          document.getElementById("status").innerHTML = json.message;
+        });
+    }
+  </script>
+</html>
