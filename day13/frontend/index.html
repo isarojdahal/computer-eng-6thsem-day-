@@ -1,0 +1,42 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="" id="name" placeholder="Name" /><input
+      type="text"
+      name=""
+      id="location"
+      placeholder="Location"
+    />
+    <button onclick="sendGreetings()">Greet</button>
+    <div id="status"></div>
+  </body>
+
+  <script>
+    function sendGreetings() {
+      const name = document.getElementById("name").value ?? "Saroj";
+      const location = document.getElementById("location").value ?? "Australia";
+      //   fetch(
+      //     `http://localhost:4000/user/greet?name=${name}&location=${location}`
+      //   )
+      //     .then((res) => res.text())
+      //     .then((data) => (document.getElementById("status").innerHTML = data));
+
+      fetch(`http://localhost:4000/user/greet`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          location,
+        }),
+      })
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("status").innerHTML = data));
+    }
+  </script>
+</html>
