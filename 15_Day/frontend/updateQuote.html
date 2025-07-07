@@ -1,0 +1,56 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="./index.html">List Quote</a>
+    <a href="./AddQuote.html">Add Quote</a>
+    <a href="./updateQuote.html">Update Quote</a>
+
+    <hr />
+    Update existing Quote by providing its id
+    <br /><br />
+
+    ID:
+    <input type="number" name="" id="quoteId" />
+    <br />
+    Quote:
+    <input type="text" name="" id="quote" />
+    <br />
+    Author:
+    <input type="text" id="author" />
+
+    <br />
+    <input type="button" value="Update" onclick="updateQuote()" />
+
+    <hr />
+    <div id="status"></div>
+  </body>
+
+  <script>
+    function updateQuote() {
+      const id = document.getElementById("quoteId").value;
+      const quote = document.getElementById("quote").value;
+      const author = document.getElementById("author").value;
+
+      fetch("http://localhost:4000/quote", {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          quote,
+          author,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("data", data);
+          document.getElementById("status").innerHTML = data.message;
+        });
+    }
+  </script>
+</html>

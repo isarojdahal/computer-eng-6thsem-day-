@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="./index.html">List Quote</a>
+    <a href="./AddQuote.html">Add Quote</a>
+    <a href="./updateQuote.html">Update Quote</a>
+
+    <hr />
+    <div id="list"></div>
+  </body>
+
+  <script>
+    fetch("http://localhost:4000/quote")
+      .then((res) => res.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          document.getElementById(
+            "list"
+          ).innerHTML += `<br/>${data[i].quote} <br/> ${data[i].author}
+          <input type="button" value="Delete" onclick="deleteQuote(${data[i].id})"/>
+          <hr/>`;
+        }
+      });
+
+    function deleteQuote(id) {
+      fetch(`http://localhost:4000/quote/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("data", data);
+        });
+    }
+  </script>
+</html>
