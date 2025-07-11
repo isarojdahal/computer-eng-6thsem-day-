@@ -18,7 +18,13 @@ try {
   const app = express();
   app.use(cors("*"));
   app.use(express.json());
-  app.post("/quote", async (req, res) => {
+
+  function validate(req, res, next) {
+    if (req.body.author && req.body.quote) next();
+    else res.json({ message: "Invalid data. (Unable to add new quote)" });
+  }
+
+  app.post("/quote", validate, async (req, res) => {
     const body = req.body;
 
     const inserted = await collection.insertOne({

@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form enctype="multipart/form-data">
+      <input type="file" id="photo" multiple="false" />
+      <input type="button" value="Upload" onclick="uploadPhoto()" />
+    </form>
+  </body>
+  <script>
+    // backend file is index3.js
+    function uploadPhoto() {
+      console.log("button clicked");
+      const file = document.getElementById("photo").files[0];
+
+      const formdata = new FormData();
+      formdata.append("photo", file);
+
+      fetch("http://localhost:4000/upload", {
+        method: "POST",
+        body: formdata,
+      });
+    }
+  </script>
+</html>
