@@ -1,0 +1,49 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>Email</label>
+    <input type="email" name="" id="email" />
+    <br />
+    <label>Password</label>
+    <input type="password" name="" id="password" />
+
+    <br />
+    <input type="submit" value="Login" onclick="handleLogin()" />
+
+    <br />
+    <div id="status"></div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/zod@3.22.4/lib/index.umd.min.js"></script>
+
+  <script>
+    const { z } = Zod; // window.Zod
+
+    console.log("z", z);
+    function handleLogin() {
+      const loginSchema = z.object({
+        email: z.string().email(),
+        password: z
+          .string("password is required")
+          .min(2, "password minimum length is 2"),
+      });
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const statusDiv = document.getElementById("status");
+
+      try {
+        loginSchema.parse({ email: email, password: password });
+        statusDiv.innerHTML = "";
+      } catch (er) {
+        const message = JSON.parse(er.message);
+        statusDiv.innerHTML = `<b style="color:red">${message[0].message}</b>`;
+      }
+    }
+  </script>
+
+  <script></script>
+</html>
