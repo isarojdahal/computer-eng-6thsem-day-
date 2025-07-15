@@ -65,6 +65,25 @@
         registerSchema.parse({ name, email, password, confirmPassword });
         statusDiv.innerHTML = "";
         // fetch... api
+
+        fetch("http://localhost:4000/register", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            name,
+            password,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("data", data);
+          })
+          .catch((err) => {
+            console.log("err", err);
+          });
       } catch (er) {
         const message = JSON.parse(er.message);
         console.log("message", message);
