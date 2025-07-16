@@ -1,0 +1,94 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <label>Name</label>
+      <input type="text" name="" id="name" />
+      <br />
+
+      <label>Email</label>
+      <input type="email" name="" id="email" />
+
+      <br />
+      <label>Password</label>
+      <input type="password" name="" id="password" />
+
+      <br />
+      <label>Confirm Password</label>
+      <input type="password" name="" id="confirmPassword" />
+
+      <br />
+
+      <input type="submit" value="Register" onclick="handleRegister()" />
+
+      <br />
+      <div id="status"></div>
+    </div>
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/zod@3.22.4/lib/index.umd.min.js"></script>
+
+  <script>
+    const { z } = Zod; // window.Zod
+
+    function handleRegister() {
+      const registerSchema = z
+        .object({
+          name: z
+            .string()
+            .min(3, "Name should be at least of 3 letters")
+            .max(50, "Maximum name length is 50"),
+          email: z.string().email(),
+          password: z
+            .string()
+            .min(5, "Password should be at least of 5 letters."),
+          confirmPassword: z
+            .string()
+            .min(5, "Confirm password should be at least of 5 letters."),
+        })
+        .refine((data) => data.password === data.confirmPassword, {
+          message: "Passwords don't match",
+          path: ["confirmPassword"], // path of error
+        });
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const statusDiv = document.getElementById("status");
+
+      try {
+        registerSchema.parse({ name, email, password, confirmPassword });
+        statusDiv.innerHTML = "";
+        // fetch... api
+
+        fetch("http://localhost:4000/register", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            name,
+            password,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("data", data);
+          })
+          .catch((err) => {
+            console.log("err", err);
+          });
+      } catch (er) {
+        const message = JSON.parse(er.message);
+        console.log("message", message);
+        statusDiv.innerHTML = `<b style="color:red">${message[0].message}</b>`;
+      }
+    }
+  </script>
+</html>
